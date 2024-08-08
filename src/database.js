@@ -1,17 +1,11 @@
-const mysql = require('promise-mysql')
-const dotenv = require('dotenv')
+const { Pool } = require('pg');
 
-dotenv.config()
+const pool = new Pool({
+  user: 'postgres',
+  host: 'localhost',
+  database: 'postgres',
+  password: 'Password',
+  port: 5432
+});
 
-const connetion = mysql.createConnection({
-  host:process.env.HOST,
-  database:process.env.DATABASE,
-  user: process.env.USER,
-  password: process.env.PASSWORD
-})
-
-const getConnection = async () => await connetion
-
-module.exports = {
-  getConnection
-}
+module.exports = pool;
